@@ -31,13 +31,13 @@ locals {
 
 resource "helm_release" "alb_grafana" {
   name      = "${var.alb_grafana_release_name}"
-  namespace = kubernetes_namespace.grafana.metadata[0].name
+  namespace = "grafana"
   chart     = var.alb_grafana_chart_path
   version   = var.alb_grafana_chart_version
 
   set {
     name  = "namespace"
-    value = kubernetes_namespace.grafana.metadata[0].name
+    value = "grafana"
   }
   
   set {
