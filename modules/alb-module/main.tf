@@ -63,3 +63,9 @@ resource "helm_release" "alb_grafana" {
   values = [file(var.alb_grafana_values_file)]
 
 }
+
+resource "time_sleep" "wait_for_alb" {
+  depends_on = [helm_release.alb_grafana]
+
+  create_duration = "3m"
+}

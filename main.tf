@@ -23,18 +23,6 @@ module "alb_module" {
   depends_on = [module.grafana_module]
 }
 
-# Null resource for introducing sleep (useful for waiting)
-resource "null_resource" "sleep" {
-  triggers = {
-    always_run = timestamp()
-  }
-
-  provisioner "local-exec" {
-    command = "sleep 120"
-  }
-  depends_on = [module.alb_module]
-}
-
 module "route53_module" {
   source = "./modules/route53-module"
 
